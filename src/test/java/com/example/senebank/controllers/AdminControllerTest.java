@@ -16,7 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 @SpringBootTest
 @Slf4j
-public class AdminControllerTest {
+class AdminControllerTest {
 
     @Autowired
     private AdminController adminController;

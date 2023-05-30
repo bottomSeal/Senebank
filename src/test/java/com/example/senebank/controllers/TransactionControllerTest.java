@@ -14,7 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 @SpringBootTest
 @Slf4j
-public class TransactionControllerTest {
+class TransactionControllerTest {
 
     @Autowired
     private TransactionController transactionController;
