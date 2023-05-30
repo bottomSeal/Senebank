@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TransactionRegisterResponse {
 
-    private int newBalance;
+    private int payload;
+
+    private int accountFromId;
+
+    private int accountToId;
 
 }

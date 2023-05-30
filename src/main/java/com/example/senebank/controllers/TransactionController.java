@@ -25,8 +25,12 @@ public class TransactionController {
     public TransactionRegisterResponse exchange(@RequestBody TransactionRegisterRequest registerRequest){
        log.info(registerRequest.toString());
 
-        AccountModel accountModel = transactionService.exchange(registerRequest);
+        TransactionModel transactionModel = transactionService.exchange(registerRequest);
 
-        return new TransactionRegisterResponse(accountModel.getBalance());
+        return new TransactionRegisterResponse(
+                transactionModel.getAccountFromId(),
+                transactionModel.getAccountToId(),
+                transactionModel.getPayload()
+        );
     }
 }

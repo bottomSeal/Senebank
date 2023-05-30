@@ -8,27 +8,42 @@ import com.example.senebank.models.TransactionModel;
 import com.example.senebank.repositories.TransactionRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class TransactionDao {
 
     private final TransactionRepository transactionRepository;
 
-    AccountDao accountDao;
+    private final AccountDao accountDao;
 
     @Transactional
     public TransactionEntity createTransaction(TransactionRegisterRequest transactionRegisterRequest,
                                               UserEntity transactionOwner){
+        AccountEntity accountFrom = accountDao
+                .getAccountByIdAndOwner(transactionRegisterRequest.getAccountFromId(), transactionOwner);
+
+        if(accountFrom.getBalance() < transactionRegisterRequest.getPayload()) {
+            log.info("Недостаточно средств на счете.");
+            throw new IllegalArgumentException("Недостаточно средств на счете.");
+        }
+
+        accountDao.setNewBalance(accountFrom.getAccountId(),
+                accountFrom.getBalance() - transactionRegisterRequest.getPayload());
+
+        accountDao.setNewBalance(transactionRegisterRequest.getAccountToId(),
+                accountFrom.getBalance() + transactionRegisterRequest.getPayload());
+
         return transactionRepository.save(
                 TransactionEntity.builder()
                         .transactionOwner(transactionOwner)
-                        .accountFromId(accountDao
-                                .getAccountByIdAndOwner(transactionRegisterRequest.getAccountFromId(), transactionOwner))
+                        .accountFromId(accountFrom)
                         .accountToId(accountDao.getAccountById(transactionRegisterRequest.getAccountToId()))
                         .payload(transactionRegisterRequest.getPayload())
                         .build()
