@@ -25,10 +25,6 @@ public class TransactionServiceImpl implements TransactionService{
 
     private final UserDao userDao;
 
-    private final JwtService jwtService;
-
-    private final HttpServletRequest request;
-
     @Override
     public TransactionModel exchange(TransactionRegisterRequest registerRequest) {
 

@@ -2,9 +2,7 @@ package com.example.senebank.services;
 
 import com.example.senebank.dao.AccountDao;
 import com.example.senebank.dao.TransactionDao;
-import com.example.senebank.dao.UserDao;
-import com.example.senebank.entities.TransactionEntity;
-import com.example.senebank.messages.requests.AdminGetAccountTransactionRequest;
+import com.example.senebank.dao.UserDao;import com.example.senebank.messages.requests.AdminGetAccountTransactionRequest;
 import com.example.senebank.messages.requests.AdminGetUserTransactionRequest;
 import com.example.senebank.models.TransactionModel;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Slf4j

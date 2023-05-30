@@ -8,5 +8,4 @@ public interface JwtService {
 
     UserModel parseToken(String jwt);
 
-
 }
