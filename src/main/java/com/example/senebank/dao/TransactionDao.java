@@ -38,7 +38,8 @@ public class TransactionDao {
                 accountFrom.getBalance() - transactionRegisterRequest.getPayload());
 
         accountDao.setNewBalance(transactionRegisterRequest.getAccountToId(),
-                accountFrom.getBalance() + transactionRegisterRequest.getPayload());
+                accountDao.getAccountById(transactionRegisterRequest.getAccountToId())
+                        .getBalance() + transactionRegisterRequest.getPayload());
 
         return transactionRepository.save(
                 TransactionEntity.builder()
@@ -74,6 +75,17 @@ public class TransactionDao {
         ArrayList<TransactionModel> list = new ArrayList<>();
 
         for (TransactionEntity transaction: transactionRepository.findAllByTransactionOwner(transactionOwner)){
+            list.add(TransactionModel.fromEntity(transaction));
+        }
+
+        return list;
+    }
+
+    public List<TransactionModel> getAllTransactionsByAccount(int accountId){
+        ArrayList<TransactionModel> list = new ArrayList<>();
+
+        for (TransactionEntity transaction: transactionRepository
+                .findAllByAccountFromId_AccountIdOrAccountToId_AccountId(accountId, accountId)){
             list.add(TransactionModel.fromEntity(transaction));
         }
 

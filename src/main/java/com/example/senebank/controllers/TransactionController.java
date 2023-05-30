@@ -1,10 +1,7 @@
 package com.example.senebank.controllers;
 
-import com.example.senebank.messages.requests.AccountRegisterRequest;
 import com.example.senebank.messages.requests.TransactionRegisterRequest;
-import com.example.senebank.messages.responses.AccountRegisterResponse;
 import com.example.senebank.messages.responses.TransactionRegisterResponse;
-import com.example.senebank.models.AccountModel;
 import com.example.senebank.models.TransactionModel;
 import com.example.senebank.services.TransactionService;
 import lombok.RequiredArgsConstructor;

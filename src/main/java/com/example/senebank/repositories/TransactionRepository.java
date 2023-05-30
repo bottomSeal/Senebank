@@ -17,6 +17,8 @@ public interface TransactionRepository extends JpaRepository<TransactionEntity, 
 
     List<TransactionEntity> findAllByTransactionOwner(UserEntity transactionOwner);
 
+    List<TransactionEntity> findAllByAccountFromId_AccountIdOrAccountToId_AccountId(int accountFromId, int accountToId);
+
     @Transactional
     @Modifying
     @Query("DELETE FROM TransactionEntity e " +
