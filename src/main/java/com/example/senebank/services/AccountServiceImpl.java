@@ -37,8 +37,7 @@ public class AccountServiceImpl implements AccountService{
         AccountEntity newAccount = accountDao.createAccount(
                 accountRegisterRequest,
                 userDao.getUserByEmail(
-                        jwtService.parseToken(JwtUtils.getTokenFromRequest(request))
-                                .getEmail()
+                        (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
                 )
         );
 
@@ -50,8 +49,7 @@ public class AccountServiceImpl implements AccountService{
 
         accountDao.deleteByIdAndOwner(accountClosureRequest.getAccountId(),
                 userDao.getUserByEmail(
-                        jwtService.parseToken(JwtUtils.getTokenFromRequest(request))
-                                .getEmail()
+                        (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
                 )
         );
 
@@ -62,8 +60,7 @@ public class AccountServiceImpl implements AccountService{
     public AccountModel info(AccountInfoRequest accountInfoRequest) {
         return AccountModel.fromEntity(accountDao.getAccountByIdAndOwner(accountInfoRequest.getAccountId(),
                         userDao.getUserByEmail(
-                                jwtService.parseToken(JwtUtils.getTokenFromRequest(request))
-                                        .getEmail()
+                                (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
                         )
                 )
         );

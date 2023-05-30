@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public TokenModel register(UserRegisterRequest registerRequest) {
-        log.info(registerRequest.toString());
 
         if(userDao.isUserExist(registerRequest.getEmail())) {
             log.info("User with same email already exist");
@@ -54,6 +53,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public TokenModel login(UserLoginRequest loginRequest) {
+
         if(!userDao.isUserExist(loginRequest.getEmail())){
             log.info("User not found");
             throw new UsernameNotFoundException("User not found");

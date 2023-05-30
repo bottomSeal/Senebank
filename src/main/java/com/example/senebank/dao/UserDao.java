@@ -38,7 +38,6 @@ public class UserDao {
                 .registerDate(LocalDate.now())
                 .userRole(role)
                 .build());
-
     }
 
     public UserEntity getUserByEmail(String email){

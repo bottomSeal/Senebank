@@ -13,6 +13,7 @@ import com.example.senebank.models.TransactionModel;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,8 +35,7 @@ public class TransactionServiceImpl implements TransactionService{
         TransactionEntity newTransaction = transactionDao.createTransaction(
                 registerRequest,
                 userDao.getUserByEmail(
-                        jwtService.parseToken(JwtUtils.getTokenFromRequest(request))
-                                .getEmail()
+                        (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()
                 )
         );
 
