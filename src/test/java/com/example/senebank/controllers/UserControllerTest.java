@@ -1,6 +1,5 @@
 package com.example.senebank.controllers;
 
-import com.example.senebank.controllers.UserController;
 import com.example.senebank.messages.requests.UserLoginRequest;
 import com.example.senebank.messages.requests.UserRegisterRequest;
 import com.example.senebank.messages.responses.UserDeleteResponse;

@@ -1,6 +1,5 @@
 package com.example.senebank.controllers;
 
-import com.example.senebank.controllers.AccountController;
 import com.example.senebank.messages.requests.*;
 import com.example.senebank.messages.responses.*;
 import lombok.extern.slf4j.Slf4j;
